@@ -1,23 +1,35 @@
 import React, { Component } from "react";
 import Message from "./Message.jsx";
+import Notification from "./Notification.jsx";
 
 
 export default class MessageList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { messages: this.props.messages
-    }
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  componentDidMount() {
+    this.scrollToBottom();
   }
 
+  componentDidUpdate() {
+    console.log("SCROLL TO BOTTOM")
+    this.scrollToBottom();
+  }
 
   render () {
-    const messagesMapped = this.props.messages.map(messageTo => (
-      <Message message={messageTo} key={messageTo.id}/>
-    ))
+    const incomingMapped = this.props.messages.map(messageTo => {
+      return messageTo.type === 'incomingMessage' ?
+        (<Message message={messageTo} key={messageTo.id}/>)
+        :
+        (<Notification notification={messageTo} key={messageTo.id} />)
+    })
 
     return (
       <main className="messages">
-      {messagesMapped}
+      {incomingMapped}
+      <div style={{ float:"left", clear: "both" }}
+        ref={(el) => { this.messagesEnd = el; }}>
+      </div>
         <div className="message system">
         </div>
       </main>

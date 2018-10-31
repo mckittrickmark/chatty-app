@@ -34,6 +34,10 @@ h1 {
       padding: 0 9px;
     }
 
+    .chatbar-color {
+      flex: 1;
+
+    }
     .chatbar-message {
       flex: 8;
     }
@@ -45,6 +49,7 @@ h1 {
     .message {
       display: flex;
       padding: 5px;
+      flex-wrap: wrap;
     }
 
     .message.system {
@@ -62,10 +67,37 @@ h1 {
     .message-content {
       flex: 8;
     }
+    .message-text-container {
+      display: block;
+    }
+
+
+    .message-image-container {
+      width: 100%;
+      max-height: 70%;
+      display: flex;
+      align-items: center;
+    }
+
+    .message-image {
+      max-width: 60%;
+      margin: auto;
+    }
 
     .message-username {
       flex: 2;
       font-weight: 700;
+    }
+
+    .notification {
+      display: flex;
+      padding: 5px;
+    }
+
+    .notification-content {
+      overflow: hidden;
+      margin: 5px;
+      padding: 0 10px;
     }
 
     .navbar {
@@ -89,4 +121,9 @@ h1 {
       line-height: 60px;
       padding: 0 10px;
       text-decoration: none;
+    }
+
+    .navbar-user-count {
+      padding: 10px 10px;
+      float: right;
     }
