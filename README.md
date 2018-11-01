@@ -48,59 +48,16 @@ Run npm install from the chatty_server folder
   - ws: 6.1.0
 
 ## Screenshots and Functionality
-!["Overall View"](https://github.com/mckittrickmark/tweeter/blob/master/public/images/Screen%20Shot%202018-10-12%20at%205.53.58%20PM.png)
+!["Overall View"](https://github.com/mckittrickmark/chatty-app/blob/master/app/build/pictures/Screen%20Shot%202018-11-01%20at%202.12.06%20PM.png)
+The overall view allows users to see all messages posted to the chat. Upon receiving a new message the screen will scroll to the bottom. Username colors are consistent between different user sesssions.
 
+!["Chatbar"](https://github.com/mckittrickmark/chatty-app/blob/master/app/build/pictures/Screen%20Shot%202018-11-01%20at%202.12.16%20PM.png)
+The chatbar has four inputs 1) color selection (for username) 2) Username selection 3) Text field (which also accepts jpg, png, gif) 4) Random Gif (only cats)
+
+!["Navbar"](https://github.com/mckittrickmark/chatty-app/blob/master/app/build/pictures/Screen%20Shot%202018-11-01%20at%202.12.27%20PM.png)
+The Navbar has a link to this page (which is wholly redundant as a SPA) and a count of the users connected, so if you talk to yourself, you can do it intentionally.
 
 ## Other
 This project is based on a boilerplate example here: lighthouse-labs/react-simple-boilerplate.git
 
 
-
-
-
-
-
-
-
-A minimal and light dev environment for ReactJS.
-
-### Usage
-
-Clone the boilerplate and create your own git repo.
-
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
-
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
