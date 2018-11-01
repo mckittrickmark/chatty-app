@@ -100,7 +100,7 @@ class App extends Component {
       if (parsedIncoming.type === 'userInfo') {
 
         // Checking if color information is included. If color information is included, then the currentUser information needs to be updated
-        if (parsedIncoming.color) {
+        if (parsedIncoming.color && this.state.userCount === 0) {
           this.setState({userCount: parsedIncoming.userCount,
                         currentUser:{ name: this.state.currentUser.name,
                                       color: parsedIncoming.color.value,
