@@ -3,6 +3,9 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuid = require('uuid/v4');
+const fetch = require('node-fetch');
+const querystring = require('querystring');
+const {Api_key} = require('./.secrets')
 
 // Set the port to 3001
 const PORT = 3001;
@@ -16,43 +19,55 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
-var primaryAndYellow = ['#FF0000', '#00FF00',   '#0000FF', '#999900']
+//Color list for random color selection
+var primaryAndYellow = [{label: 'Red', value: '#FF0000'}, {label: 'Lime', value: '#00FF00'}, {label: 'Blue', value:'#0000FF'}, {label:'Brownish Yellow', value: '#999900'}]
+
+// broadcast function for sending data out to all connected users
+function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+    client.send(JSON.stringify(data));
+  })
+}
+
+
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
-
-// need to implement broadcast message function to generally broadcast anything back
-
-
+// Starts connection generates random color and counts users
 wss.on('connection', (ws) => {
   console.log('Client connected');
   const color = primaryAndYellow[Math.floor(Math.random() * 4)]
-  console.log("COLOR", color)
   const userInfoObj = {userCount: wss.clients.size, type:'userInfo', color: color}
-  console.log("userInfoObj", userInfoObj)
+  broadcast(userInfoObj)
 
-  wss.clients.forEach(function each(client) {
-    client.send(JSON.stringify(userInfoObj));
-  });
-
+// Receives messages from browsers, differentiates between message 'type' and calls broadcast to send to all connected users
   ws.on('message', function incoming(data) {
     const incomingMessage = JSON.parse(data)
     if (incomingMessage.type === 'postMessage'){
       incomingMessage.id = uuid()
       incomingMessage.type = 'incomingMessage'
-      console.log("incoming message", incomingMessage)
-      wss.clients.forEach(function each(client) {
-          client.send(JSON.stringify(incomingMessage));
-      });
+      broadcast(incomingMessage)
     } else if (incomingMessage.type === 'postNotification') {
       incomingMessage.type = 'incomingNotification'
       incomingMessage.id = uuid()
 
-      wss.clients.forEach(function each(client) {
-       client.send(JSON.stringify(incomingMessage));
-      })
+      broadcast(incomingMessage)
     } else {
-      console.log('Unrecognized type')
+      // api_key wa previously stored in a separate non-shared file, but it doesn't really matter so I put it here.
+      const qs = querystring.stringify({
+        api_key: "vGmdqWKq4c2MYDkywlNOZC3inGEFucmA",
+        tag: "cats"
+      })
+      fetch(`https://api.giphy.com/v1/gifs/random?${qs}`)
+                .then( resp => resp.json())
+                .then( json => {
+                  incomingMessage.imageInput = json.data.image_original_url
+                  incomingMessage.type = "incomingMessage"
+
+                  broadcast(incomingMessage)
+                })
+
+      console.log('WHAT')
     }
 
 
@@ -60,11 +75,7 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected')
-    const userCountObj = {userCount: wss.clients.size, type:'userCount'}
-
-
-    wss.clients.forEach(function each(client) {
-      client.send(JSON.stringify(userCountObj));
-    });
+    const userInfoObj = {userCount: wss.clients.size, type:'userInfo'}
+    broadcast(userInfoObj)
   });
 });

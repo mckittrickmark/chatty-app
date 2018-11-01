@@ -1,11 +1,19 @@
-//import React from 'react'
-//import { Dropdown } from 'semantic-ui-react'
-//
-//const colorDropList = [{text: 'Red', code: '#FF0000'}, {text: 'Lime', code: '#00FF00'}, {text: 'Blue', code:'#0000FF'}, {text:'Yellow', code: '#999900'}]
-//// countryOptions = [ { key: 'af', value: 'af', flag: 'af', text: 'Afghanistan' }, ...  ]
-//
-//const DropdownColor = () => (
-//  <Dropdown placeholder='Select New Color' fluid search selection options={colorDropList} />
-//)
-//
-//export default DropdownColor//
+import React, { Component } from 'react'
+import Dropdown from 'react-dropdown'
+
+// This color list matches the color list randomly assigned on the server. If the two lists are different,
+// it will not cause an error, but the user may be assigned a color on establishing a connection that they normally would not be able to select from the list.
+const colorDropList = [{label: 'Red', value: '#FF0000'}, {label: 'Lime', value: '#00FF00'}, {label: 'Blue', value:'#0000FF'}, {label:'Brownish Yellow', value: '#999900'}]
+
+// This is the class for the dropdown list in the Chatbar component.
+class DropdownColor extends Component {
+  render() {
+    const onChange = (e) => {
+      this.props.trx._changeColor(e)
+    }
+    return (
+      <Dropdown className="chatbar-dropdown" menuClassName='myMenuClassName' placeholderClassName='myPlaceholderClassName' placeholder={this.props.currentUser.colorLabel} fluid search selection options={colorDropList} onChange={onChange} />
+    )}
+}
+
+export default DropdownColor
