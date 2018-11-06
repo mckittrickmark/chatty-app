@@ -29,11 +29,10 @@ export default class MessageList extends Component {
 
     return (
       <main className="messages">
-      {incomingMapped}
-
-      <div className="message system" style={{ float:"left", clear: "both" }}
-             ref={(el) => { this.messagesEnd = el; }}>
-      </div>
+        {incomingMapped}
+        <div className="message system" style={{ float:"left", clear: "both" }}
+          ref={(el) => { this.messagesEnd = el; }}>
+        </div>
       </main>
       )
   }

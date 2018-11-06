@@ -16,14 +16,6 @@ class App extends Component {
     messages: [],
     userCount: 0
     }
-    //giphy API key - vGmdqWKq4c2MYDkywlNOZC3inGEFucmA
-
-    //qs =
-    //querystring.stringify
-    //fetch
-    //
-
-
 
     // Three helper functions that are passed into the object this.trx
     // The three functions Change colors, add messages, and change usernames

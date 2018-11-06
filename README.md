@@ -14,6 +14,7 @@ To run this program. The client side (APP) and the server (chatty_server) need t
 
 ### App
 Run npm install from the app folder
+When you are ready to start the client, run npm start in the App directory.
 
 #### Dependencies:
   - react: 15.4.2
@@ -39,7 +40,8 @@ Run npm install from the app folder
 
 
 ### chatty_server
-Run npm install from the chatty_server folder
+Run npm install from the chatty_server folder to load the required dependencies.
+When you are ready to start the server, run npm start in the chatty-server directory.
 
 #### Dependencies:
   - express: 4.16.4

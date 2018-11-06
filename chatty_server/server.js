@@ -5,7 +5,6 @@ const SocketServer = require('ws').Server;
 const uuid = require('uuid/v4');
 const fetch = require('node-fetch');
 const querystring = require('querystring');
-const {Api_key} = require('./.secrets')
 
 // Set the port to 3001
 const PORT = 3001;

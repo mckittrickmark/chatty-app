@@ -15,10 +15,10 @@ export default class Message extends Component {
     // color is automatically randomly set on the server side on connection, afterwards color can be changed in the dropdown class in chatbar class
     const colorUser = this.props.message.color
     return (<div className="message">
-             <div className="message-text-container">
-              <span className="message-username" style={{color:colorUser}}>{this.props.message.username}</span>
-              <span className="message-content">{this.props.message.content}</span>
-             </div>
+              <div className="message-text-container">
+                <span className="message-username" style={{color:colorUser}}>{this.props.message.username}</span>
+                <span className="message-content">{this.props.message.content}</span>
+              </div>
               {imageDisplay}
             </div>
       )
